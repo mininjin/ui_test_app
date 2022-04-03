@@ -1,14 +1,12 @@
-import { createStore } from 'vuex'
+import persistedState from "@/plugins/persistedState";
+import { createStore } from "vuex";
+import { actions } from "./actions";
+import { mutations } from "./mutations";
+import { state } from "./state";
 
 export default createStore({
-  state: {
-  },
-  getters: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
-  }
-})
+  state,
+  mutations,
+  actions,
+  plugins: [persistedState],
+});

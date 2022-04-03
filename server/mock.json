@@ -1,0 +1,131 @@
+{
+  "title": "UIテスト",
+  "explanation": "UIテストアプリです。",
+  "questionnaires": [
+    {
+      "questionnaireId": 1,
+      "title": "好みについて",
+      "explanation": "これはあなたの好みを知るアンケートです。",
+      "questions": [
+        {
+          "questionId": 1,
+          "type": "select",
+          "question": "性別を教えてください。",
+          "required": true,
+          "config": {
+            "choices": ["男性", "女性", null]
+          }
+        },
+        {
+          "questionId": 2,
+          "type": "select",
+          "question": "好きな炭水化物を選んでください。",
+          "required": true,
+          "config": {
+            "choices": [
+              "ご飯",
+              "パン",
+              "うどん",
+              "そば",
+              "スパゲッティ",
+              "ラーメン",
+              "ふかし芋",
+              "フライドポテト",
+              "焼き芋",
+              null
+            ],
+            "multiSelect": true
+          }
+        },
+        {
+          "questionId": 3,
+          "type": "ranking",
+          "question": "人生で最も楽しかった時期をランキングで教えてください。",
+          "required": true,
+          "config": {
+            "choices": [
+              "0~6歳",
+              "7~12歳",
+              "13~18歳",
+              "19~24歳",
+              "25~30歳",
+              "31歳~40歳",
+              "41歳~",
+              null
+            ],
+            "lowest": 3
+          }
+        },
+        {
+          "questionId": 4,
+          "type": "member",
+          "question": "それぞれ持っている数を教えてください。",
+          "required": true,
+          "config": {
+            "choices": [
+              { "label": "車", "unit": "台", "step": 1 },
+              { "label": "家", "unit": "棟", "step": 1 },
+              { "label": "お金", "unit": "万円", "step": 10 },
+              { "unit": "人", "step": 10 }
+            ]
+          }
+        },
+        {
+          "questionId": 5,
+          "type": "member",
+          "question": "ペットを飼うならどの動物がいいですか？また、飼うなら何匹くらい欲しいですか？",
+          "required": true,
+          "config": {
+            "choices": [
+              { "label": "犬", "unit": "匹", "step": 1 },
+              { "label": "猫", "unit": "匹", "step": 1 },
+              { "label": "ハムスター", "unit": "匹", "step": 1 },
+              { "label": "うさぎ", "unit": "羽", "step": 1 },
+              { "label": "インコ", "unit": "匹", "step": 1 },
+              { "label": "オウム", "unit": "匹", "step": 1 },
+              { "label": "カエル", "unit": "匹", "step": 1 },
+              { "label": "ヘビ", "unit": "匹", "step": 1 },
+              { "unit": "匹", "step": 1 }
+            ],
+            "inputSingle": true
+          }
+        }
+      ]
+    },
+    {
+      "questionnaireId": 2,
+      "title": "テストアンケート2",
+      "explanation": "これはテストアンケート2です。",
+      "questions": [
+        {
+          "questionId": 6,
+          "type": "seek-bar",
+          "question": "あなた自身への自信を教えてください。",
+          "required": true,
+          "config": {
+            "labels": [
+              "消えてしまいたい",
+              "私ダメかも",
+              "私イケてるかも",
+              "世界一"
+            ]
+          }
+        },
+        {
+          "questionId": 7,
+          "type": "zip-code",
+          "question": "今後住みたい地域を郵便番号で教えてください。",
+          "required": true,
+          "config": { "requireLength": 3 }
+        },
+        {
+          "questionId": 8,
+          "type": "barcode",
+          "question": "製品のバーコードを読み取ります。",
+          "required": true,
+          "config": { "reader": "ean_reader" }
+        }
+      ]
+    }
+  ]
+}

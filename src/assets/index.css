@@ -1,0 +1,47 @@
+@charset "utf-8";
+
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+:root {
+  --font-name: "Kiwi Maru", serif;
+  --font-title: "Noto Serif JP", serif;
+  --font-body: "Kaisei Tokumin", serif;
+  --theme-color: #bae8e8;
+  --sub-color: #272343;
+  --background-color: #fffffe;
+  --next-color: #ffd803;
+  --container-color: #e3f6f5;
+  --title-color: #bae8e8;
+  --footer-color: #eee9e6;
+  --copyright-color: #bababa;
+  --error-color: #d9534f;
+}
+
+li {
+  list-style: none;
+}
+
+body,
+html {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  height: 100%;
+}
+
+button,
+a {
+  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.3);
+  border-radius: 0.3rem;
+  padding: 3%;
+  font-weight: bold !important;
+}
+button:disabled {
+  opacity: 0.3 !important;
+}
+label {
+  margin: 0;
+}
