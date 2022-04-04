@@ -24,14 +24,24 @@
         />
       </div>
       <div class="flex-auto flex items-center py-1 px-3">
-        <span v-if="status == 'fetched'">
-          {{ region || "市区町村が見つかりません" }}
-        </span>
-        <span v-else-if="status == 'insufficient'">
-          市区町村が見つかりません
-        </span>
-        <span v-else-if="status == 'loading'"> 通信中... </span>
-        <span v-else-if="status == 'error'"> サーバーエラー </span>
+        <transition
+          enter-active-class="transition-all duration-500"
+          enter-from-class="opacity-0"
+          enter-to-class="opacity-1"
+          leave-active-class="transition-all duration-500"
+          leave-from-class="opacity-1"
+          leave-to-class="opacity-0"
+          mode="out-in"
+        >
+          <span v-if="status == 'fetched'">
+            {{ region || "市区町村が見つかりません" }}
+          </span>
+          <span v-else-if="status == 'insufficient'">
+            市区町村が見つかりません
+          </span>
+          <span v-else-if="status == 'loading'"> 通信中... </span>
+          <span v-else-if="status == 'error'"> サーバーエラー </span>
+        </transition>
       </div>
     </div>
     <div class="flex-1 flex flex-col p-2">
@@ -48,18 +58,38 @@
           <button
             v-if="key == 'remove'"
             type="button"
-            class="bg-white border-2 border-sub w-full rounded-xl h-full"
+            class="
+              bg-white
+              border-2 border-sub
+              w-full
+              rounded-xl
+              h-full
+              flex
+              items-center
+              justify-center
+            "
             @click="removeCode"
             :disabled="zipCode.length == 0"
           >
-            ←
+            <span class="material-icons-outlined"> keyboard_backspace </span>
           </button>
           <button
             v-else-if="key == 'reset'"
             type="button"
-            class="bg-white border-2 border-sub w-full rounded-xl h-full"
+            class="
+              bg-white
+              border-2 border-sub
+              w-full
+              rounded-xl
+              h-full
+              flex
+              items-center
+              justify-center
+            "
             @click="resetCode"
-          ></button>
+          >
+            <span class="material-icons-outlined"> restart_alt </span>
+          </button>
           <button
             v-else
             type="button"

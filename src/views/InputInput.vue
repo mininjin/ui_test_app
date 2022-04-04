@@ -16,6 +16,7 @@
         leave-active-class="transition-all duration-500"
         leave-from-class="opacity-1"
         leave-to-class="opacity-0"
+        mode="out-in"
       >
         <component
           v-if="QuestionComponent"

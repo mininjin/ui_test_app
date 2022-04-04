@@ -1,6 +1,8 @@
 import { Barcode, BarcodeAnswer } from "@/@types/schema/question";
+import { getOptionsFromConfig } from "@/libs/jsBarcode";
 import Quagga, { QuaggaJSConfigObject } from "@ericblade/quagga2";
-import { computed, ref } from "vue";
+import JsBarcode from "jsbarcode";
+import { computed, Ref, ref } from "vue";
 
 const MIN_WIDTH = 640;
 const MIN_HEIGHT = 480;
@@ -9,11 +11,15 @@ const NO_READ_TIME = 10000;
 
 type CameraStatus = "starting" | "started" | "stopped" | "un-match" | "no-read";
 
-export const useBarcode = (cb: (answer: BarcodeAnswer) => void) => {
+export const useBarcode = (
+  canvas: Ref<HTMLCanvasElement | undefined>,
+  cb: (answer: BarcodeAnswer) => void
+) => {
   const question = ref<Barcode>();
   const status = ref<CameraStatus>("stopped");
   const barcode = ref<string>();
   const reader = computed(() => question.value?.config.reader || "");
+  const option = computed(() => getOptionsFromConfig(question.value?.config));
 
   const setQuestion = (q: Barcode) => {
     question.value = q;
@@ -85,8 +91,11 @@ export const useBarcode = (cb: (answer: BarcodeAnswer) => void) => {
     //
     camera.innerHTML = `<video autoplay="true"></video>`;
     //
-    if (barcode.value) cb(barcode.value);
+    if (barcode.value) {
+      if (canvas.value) JsBarcode(canvas.value, barcode.value, option.value);
+      cb(barcode.value);
+    }
   };
 
-  return { start, stop, status, setQuestion,barcode };
+  return { start, stop, status, setQuestion, barcode };
 };

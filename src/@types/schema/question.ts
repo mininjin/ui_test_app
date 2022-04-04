@@ -1,4 +1,5 @@
 import { Skip } from "./branches";
+import { BarcodeReader } from "../lib";
 
 export type Questions =
   | Select
@@ -91,7 +92,7 @@ export type RankingAnswer = { index: number; rank: number; label: string }[];
 ///////////////////////////////////////////////////////////////////////
 export type Barcode = QuestionTemplate & {
   type: "barcode";
-  config: { reader: string };
+  config: { reader: BarcodeReader };
   answer?: BarcodeAnswer;
 };
 export type BarcodeAnswer = string;
