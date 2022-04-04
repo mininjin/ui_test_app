@@ -4,6 +4,7 @@
     ref="container"
   >
     <transition
+      v-if="canScroll"
       enter-active-class="transition-all"
       enter-from-class="opacity-0"
       enter-to-class="opacity-1"
@@ -31,7 +32,7 @@
 <script lang="ts">
 import { computed, defineComponent, onMounted, ref } from "vue";
 
-const WAIT_TIME = 100;
+const WAIT_TIME = 1000;
 
 export default defineComponent({
   props: {
@@ -41,13 +42,16 @@ export default defineComponent({
     const el = computed(() => props.el);
     const container = ref<HTMLElement>();
     const open = ref(false);
+    const canScroll = ref(false);
 
     // 初期化
     const init = () => {
       if (el.value.scrollHeight > el.value.clientHeight) {
         open.value = true;
+        canScroll.value = true;
         el.value.style.paddingBottom = container.value?.clientHeight + "px";
       } else {
+        canScroll.value = false;
         open.value = false;
       }
     };
@@ -61,23 +65,20 @@ export default defineComponent({
       el.value.addEventListener("scroll", () => {
         open.value = false;
         setTimeout(() => {
-          if (container.value) {
-            if (
-              el.value.scrollTop + el.value.clientHeight <
-              el.value.scrollHeight
-            ) {
-              open.value = true;
-            } else {
-              open.value = false;
-            }
+          if (
+            el.value.scrollTop + el.value.clientHeight <
+            el.value.scrollHeight
+          ) {
+            open.value = true;
+          } else {
+            open.value = false;
           }
         }, WAIT_TIME);
       });
+      window.addEventListener("resize", init);
     });
 
-    window.addEventListener("resize", init);
-
-    return { container, open };
+    return { container, open, canScroll };
   },
 });
 </script>

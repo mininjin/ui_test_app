@@ -104,7 +104,6 @@ export type Text = QuestionTemplate & {
   type: "text";
   config: {
     placeholder?: string; // テキストボックス内が空欄の時に表示される文字列 デフォルトは"自由入力欄"
-    rows?: number; // 行数
     max?: number; // 最大文字数
     min?: number; // 最小文字数
   };
@@ -118,13 +117,15 @@ export type TextAnswer = string;
 export type Time = QuestionTemplate & {
   type: "time";
   config?: {
+    disableDate?: boolean; // trueなら日付を非表示
     disableTime?: boolean; // trueなら時刻を非表示
     disableFuture?: boolean; // trueの時は現在より未来は不可にする
     timeStep?: number; // 時刻の刻み幅
+    defaultNow?: boolean;
   };
   answer?: TimeAnswer;
 };
-export type TimeAnswer = string;
+export type TimeAnswer = { date?: string; time?: string };
 
 ///////////////////////////////////////////////////////////////////////
 // 住所
@@ -141,11 +142,7 @@ export type ZipCodeAnswer = string;
 ///////////////////////////////////////////////////////////////////////
 export type Image = QuestionTemplate & {
   type: "image";
-  option: {
-    src: string;
-    text?: string;
-    choices: string[];
-  };
+  config: { src: string; alt?: string; choices: string[] };
   answer?: ImageAnswer;
 };
 export type ImageAnswer = number;

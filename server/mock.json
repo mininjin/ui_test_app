@@ -112,6 +112,24 @@
           }
         },
         {
+          "questionId": 9,
+          "type": "time",
+          "question": "今朝は何時に起きましたか？",
+          "required": true,
+          "config": {
+            "disableDate": true,
+            "timeStep": 10,
+            "disableFuture": true
+          }
+        },
+        {
+          "questionId": 10,
+          "type": "time",
+          "question": "次の仕事の納期はいつですか？",
+          "required": true,
+          "config": { "timeStep": 60 }
+        },
+        {
           "questionId": 7,
           "type": "zip-code",
           "question": "今後住みたい地域を郵便番号で教えてください。",
@@ -124,6 +142,38 @@
           "question": "製品のバーコードを読み取ります。",
           "required": true,
           "config": { "reader": "ean_reader" }
+        }
+      ]
+    },
+    {
+      "questionnaireId": 3,
+      "title": "テストアンケート3",
+      "explanation": "これはテストアンケート3です。",
+      "questions": [
+        {
+          "questionId": 11,
+          "type": "image",
+          "question": "次の画像はうーたんですか？",
+          "required": true,
+          "config": { "choices": ["YES", "NO"], "src": "/images/utan.jpg" }
+        },
+        {
+          "questionId": 12,
+          "type": "image",
+          "question": "次の画像を見てひとこと！",
+          "required": true,
+          "config": { "choices": [], "src": "/images/test.jpg" }
+        },
+        {
+          "questionId": 13,
+          "type": "text",
+          "question": "さっきのひとことをどうぞ！",
+          "required": true,
+          "config": {
+            "placeholder": "感想を10文字以上100文字以内で入力してね！",
+            "min": 10,
+            "max": 100
+          }
         }
       ]
     }

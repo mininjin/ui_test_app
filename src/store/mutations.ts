@@ -32,9 +32,14 @@ export const mutations: MutationTree<State> = {
   setQuestion: (state, question: Questions) => (state.page.question = question),
   // questionの回答の設定
   setAnswer(state, payload: AnswerPayload) {
-    if (state.page.question) {
+    if (state.page.question && state.page.questionnaire) {
       state.page.question.answer = payload.data;
       state.page.question.answered = payload.answered;
+      const question =
+        state.page.questionnaire.questions[state.page.questionIndex];
+      if (question.type == "branch") {
+        question.answered = payload.answered;
+      }
     }
   },
   // questionnaireのansweredフラグを設定

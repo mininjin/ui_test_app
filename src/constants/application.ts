@@ -1,3 +1,5 @@
+import { State } from "@/store/state";
+
 export const APP_NAME = "UIテストアプリ";
 export const COPYRIGHT = "2022 ©︎ 0ta Utan";
 export const ROUTE = {
@@ -7,6 +9,7 @@ export const ROUTE = {
   INPUT_END: "/input/end",
   INPUT_MODIFY: "/input/modify",
 };
+export const STORAGE_PATHS: (keyof State)[] = ["questionnaires", "common", "page"];
 export const ERROR_MESSAGE_TIME = 3000;
 export const MAX_INPUT_LENGTH = 255;
 export const MAX_TEXTAREA_LENGTH = 1000;

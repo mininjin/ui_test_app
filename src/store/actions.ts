@@ -92,18 +92,4 @@ export const actions: ActionTree<State, State> = {
   async accessCamera({ commit }) {
     commit("setCameraId", await getCameraId());
   },
-  async fetchImage({ commit }, key: string): Promise<string | void> {
-    try {
-      commit("setNowLoading", true);
-      const res = await fetch(key);
-      const blob = await res.blob();
-      return (await blobToBase64(blob)) as string;
-    } catch (err) {
-      console.error(err);
-      const error: APIError = { status: 1000 };
-      commit("setError", error);
-    } finally {
-      commit("setNowLoading", false);
-    }
-  },
 };

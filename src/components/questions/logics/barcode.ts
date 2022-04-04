@@ -7,7 +7,6 @@ import { computed, Ref, ref } from "vue";
 const MIN_WIDTH = 640;
 const MIN_HEIGHT = 480;
 const DETECT_COUNT = 3;
-const NO_READ_TIME = 10000;
 
 type CameraStatus = "starting" | "started" | "stopped" | "un-match" | "no-read";
 
@@ -78,10 +77,6 @@ export const useBarcode = (
         stop(camera);
       }
     });
-    // n秒後にエラーメッセージを表示
-    setTimeout(() => {
-      status.value = "no-read";
-    }, NO_READ_TIME);
   };
   //
   const stop = async (camera: HTMLElement) => {

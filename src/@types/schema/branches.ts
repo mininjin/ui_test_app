@@ -25,7 +25,7 @@ export type SeekBarSkip = {
 ///////////////////////////////////////////////////////////////////////
 // 分岐
 ///////////////////////////////////////////////////////////////////////
-export type Branch = Pick<QuestionTemplate, "questionId"> & {
+export type Branch = Pick<QuestionTemplate, "questionId" | "answered"> & {
   type: "branch";
   refId: number;
   config: {

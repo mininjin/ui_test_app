@@ -2,8 +2,8 @@
   <div class="h-full p-3">
     <textarea
       class="
-        max-h-full
         w-full
+        h-full
         resize-y
         rounded-lg
         border-2 border-header
@@ -14,7 +14,6 @@
       :value="answer"
       :placeholder="placeholder"
       @input="onInput"
-      :rows="rows"
       :maxlength="max"
       :minlength="min"
       ref="textarea"
@@ -42,7 +41,6 @@ export default defineComponent({
     const placeholder = computed(
       () => props.question.config?.placeholder || PLACEHOLDER
     );
-    const rows = computed(() => props.question.config?.rows);
     const max = computed(
       () => props.question.config?.max || MAX_TEXTAREA_LENGTH
     );
@@ -65,7 +63,7 @@ export default defineComponent({
     //
     onMounted(() => (answer.value = question.value.answer || ""));
 
-    return { placeholder, answer, rows, onInput, max, min };
+    return { placeholder, answer, onInput, max, min };
   },
 });
 </script>

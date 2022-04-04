@@ -60,14 +60,13 @@
           </div>
           <ul class="overflow-y-scroll flex-grow basis-0 px-2">
             <button
-              v-if="nextQuestionnaireIndex != undefined"
+              v-if="nextQuestionnaireIndex >= 0"
               class="w-full bg-next mt-2 px-3 py-2 text-left"
               @click="goNext"
             >
               次のアンケートの入力
             </button>
             <button
-              v-if="nextQuestionnaireIndex != undefined"
               class="w-full bg-sub text-white mt-2 px-3 py-2 text-left"
               @click="go(INPUT_MODIFY)"
             >
@@ -77,8 +76,54 @@
               class="w-full mt-2 px-3 py-2 text-left bg-container"
               @click="fetchData"
             >
-              データ更新
+              データをリセット
             </button>
+            <a
+              class="
+                w-full
+                mt-2
+                px-3
+                py-2
+                text-left
+                bg-container
+                flex
+                items-center
+                underline
+              "
+              href="https://twitter.com/Utan_Otouto"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <font-awesome-icon
+                icon="twitter"
+                type="fab"
+                class="mr-2 w-5 h-5"
+              />
+              Twitter
+            </a>
+            <a
+              class="
+                w-full
+                mt-2
+                px-3
+                py-2
+                text-left
+                bg-container
+                flex
+                items-center
+                underline
+              "
+              href="https://github.com/mininjin/ui_test_app"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <font-awesome-icon
+                icon="github"
+                type="fab"
+                class="mr-2 w-5 h-5"
+              />
+              GitHub
+            </a>
           </ul>
         </div>
         <div class="flex items-center mt-2 flex-grow-0 py-5">
@@ -105,6 +150,7 @@
 
 <script lang="ts">
 import { APP_NAME, ERROR_MESSAGE_TIME, ROUTE } from "@/constants/application";
+import FontAwesomeIcon from "@/plugins/FontAwesomeIcon.vue";
 import { State } from "@/store/state";
 import { computed, defineComponent, ref } from "vue";
 import { useRouter } from "vue-router";
@@ -113,11 +159,12 @@ import { useStore } from "vuex";
 const { HOME, INPUT_MODIFY, INPUT_TOP } = ROUTE;
 
 export default defineComponent({
+  components: { FontAwesomeIcon },
   setup() {
     const store = useStore<State>();
     const router = useRouter();
     const nextQuestionnaireIndex = computed(() =>
-      store.state.questionnaires.questionnaires.find((v) => v.answered)
+      store.state.questionnaires.questionnaires.findIndex((v) => !v.answered)
     );
     const menu = ref(false);
     const error = computed(() => store.state.error);

@@ -1,6 +1,11 @@
 <template>
   <div class="text-sub h-full overflow-y-scroll">
-    <DateInput :date="date" :disableFuture="disableFuture" @emitUp="setDate" />
+    <DateInput
+      v-if="!disableDate"
+      :date="date"
+      :disableFuture="disableFuture"
+      @emitUp="setDate"
+    />
     <TimeInput
       v-if="!disableTime"
       :time="time"
@@ -13,7 +18,7 @@
 
 <script lang="ts">
 import { Time, TimeAnswer } from "@/@types/schema/question";
-import { computed, defineComponent, onMounted, ref } from "vue";
+import { computed, defineComponent, onMounted } from "vue";
 import DateInput from "../UI/DateInput.vue";
 import TimeInput from "../UI/TimeInput.vue";
 import { DEFAULT_TIME_STEP } from "@/constants/application";
@@ -31,6 +36,9 @@ export default defineComponent({
     const question = computed(() => props.question);
     const disableTime = computed(
       () => props.question.config?.disableTime || false
+    );
+    const disableDate = computed(
+      () => props.question.config?.disableDate || false
     );
     const disableFuture = computed(
       () => props.question.config?.disableFuture || false
@@ -52,6 +60,7 @@ export default defineComponent({
 
     return {
       disableTime,
+      disableDate,
       disableFuture,
       date,
       time,

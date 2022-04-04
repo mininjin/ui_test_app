@@ -1,37 +1,37 @@
 <template>
-  <div class="h-full overflow-y-scroll pb-5" ref="container">
-    <div v-if="image" class="p-2 rounded">
+  <div
+    class="h-full w-full top-0 left-0 overflow-y-scroll absolute"
+    ref="container"
+  >
+    <div v-if="image" class="px-2 py-5 rounded">
       <img
         :src="image"
-        :alt="src"
+        :alt="alt"
         class="w-full object-contain rounded-xl border-header"
       />
-    </div>
-    <div v-if="text" class="p-3">
-      {{ text }}
     </div>
     <div v-if="choices.length > 0" class="flex flex-wrap w-full">
       <button
         v-for="(choice, index) in choices"
         :key="choice"
-        @click="onClick(index)"
+        @click="setAnswer(index)"
         :class="
-          'p-2 flex-auto mx-2 bg-theme' + (answer == index ? ' selected' : '')
+          'p-2 flex-auto mx-2 ' +
+          (answer == index ? 'bg-sub text-white' : 'bg-theme')
         "
       >
         {{ choice }}
       </button>
     </div>
-    <ScrollBar v-if="container" :el="container" />
   </div>
+  <ScrollBar v-if="container && image" :el="container" />
 </template>
 
 <script lang="ts">
 import { Image } from "@/@types/schema/question";
-import { State } from "@/store/state";
 import { computed, defineComponent, onMounted, ref } from "vue";
-import { useStore } from "vuex";
 import ScrollBar from "../UI/ScrollBar.vue";
+import { useImage } from "./logics/image";
 
 export type SelectAnswer = { checked: boolean; text?: string }[];
 
@@ -44,57 +44,27 @@ export default defineComponent({
     question: { type: Object as () => Image, required: true },
   },
   setup(props, context) {
-    const store = useStore<State>();
-    const src = computed(() => props.question.option.src);
-    const text = computed(() => props.question.option.text);
-    const image = ref<string>();
-    const choices = computed(() => props.question.option.choices);
-    const answer = computed(() => props.question.answer);
+    const question = computed(() => props.question);
     const container = ref<HTMLElement>();
 
     //
-    const onClick = (index: number) => {
-      // answerをemit
-      emitInput(index);
-    };
-    //
-    const emitInput = (index?: number) => {
-      let data = index != undefined ? index : answer.value;
-      //
+    const emitInput = (data?: number) => {
       context.emit("emitUp", {
         data,
         answered: choices.value.length > 0 ? data != undefined : true,
       });
     };
+    const { image, choices, setQuestion, alt, answer, setAnswer } = useImage(
+      container,
+      emitInput
+    );
 
     //
     onMounted(async () => {
-      //
-      image.value = await store.dispatch("fetchImage", src.value);
-      //
-      container.value?.addEventListener("scroll", () => {
-        if (container.value) {
-          const parent = container.value.parentElement;
-          if (
-            parent &&
-            container.value.scrollTop + parent.clientHeight >=
-              container.value.scrollHeight
-          ) {
-            emitInput();
-          }
-        }
-      });
+      await setQuestion(question.value);
     });
 
-    return {
-      container,
-      answer,
-      image,
-      src,
-      choices,
-      onClick,
-      text,
-    };
+    return { container, answer, image, alt, choices, setAnswer };
   },
   components: { ScrollBar },
 });

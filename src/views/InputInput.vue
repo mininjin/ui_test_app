@@ -1,7 +1,7 @@
 <template>
   <main v-if="question" class="h-full flex flex-col px-3 py-5">
     <ProgressBar
-      :index="questionIndex"
+      :index="answeredNumber"
       :length="questionLength"
       :duration="PROGRESS_ANIME_DURATION"
     />
@@ -9,22 +9,12 @@
       {{ question.question }}
     </div>
     <div class="flex-1 flex flex-col relative bg-container rounded shadow">
-      <transition
-        enter-active-class="transition-all duration-500"
-        enter-from-class="opacity-0"
-        enter-to-class="opacity-1"
-        leave-active-class="transition-all duration-500"
-        leave-from-class="opacity-1"
-        leave-to-class="opacity-0"
-        mode="out-in"
-      >
-        <component
-          v-if="QuestionComponent"
-          :is="QuestionComponent"
-          :question="question"
-          @emitUp="saveInput"
-        />
-      </transition>
+      <component
+        v-if="QuestionComponent"
+        :is="QuestionComponent"
+        :question="question"
+        @emitUp="saveInput"
+      />
     </div>
     <div class="flex-grow-0 py-2 flex items-center text-center">
       <div class="w-1/2 px-3 flex items-center">
@@ -72,6 +62,11 @@ export default defineComponent({
     const questionLength = computed(
       () => store.state.page.questionnaire?.questions.length || 0
     );
+    const answeredNumber = computed(
+      () =>
+        store.state.page.questionnaire?.questions.filter((v) => v.answered)
+          .length || 0
+    );
     const { QuestionComponent, setQuestionComponent } = useQuestion();
     const disableNext = ref(true);
     //
@@ -113,12 +108,12 @@ export default defineComponent({
     return {
       QuestionComponent,
       question,
-      questionIndex,
       questionLength,
       changePage,
       saveInput,
       disableNext,
       PROGRESS_ANIME_DURATION,
+      answeredNumber,
     };
   },
   components: { ProgressBar },

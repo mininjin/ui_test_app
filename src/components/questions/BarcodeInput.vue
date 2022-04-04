@@ -7,6 +7,18 @@
           : 'hidden'
       "
     >
+      <transition
+        enter-active-class="transition-all duration-500"
+        enter-from-class="opacity-0"
+        enter-to-class="opacity-1"
+      >
+        <div
+          v-if="status == 'starting'"
+          class="absolute w-full h-full flex items-center top-0 left-0"
+        >
+          <LoadingAnimation />
+        </div>
+      </transition>
       <div class="w-full h-full flex items-center" ref="camera">
         <video autoplay="true"></video>
       </div>
@@ -50,6 +62,7 @@ import { computed, defineComponent, onMounted, ref, watch } from "vue";
 import { useStore } from "vuex";
 import { State } from "@/store/state";
 import { useBarcode } from "./logics/barcode";
+import LoadingAnimation from "../UI/LoadingAnimation.vue";
 
 export default defineComponent({
   emits: {
@@ -67,7 +80,6 @@ export default defineComponent({
     //
     const camera = ref<HTMLElement>();
     const canvas = ref<HTMLCanvasElement>();
-
     //
     const onStart = async () => {
       if (camera.value) {
@@ -90,7 +102,6 @@ export default defineComponent({
       emitInput
     );
     watch(question.value, () => setQuestion(question.value));
-
     onMounted(async () => {
       //
       setQuestion(question.value);
@@ -101,7 +112,6 @@ export default defineComponent({
         disableCamera.value = false;
       }
     });
-
     return {
       camera,
       onStart,
@@ -112,5 +122,6 @@ export default defineComponent({
       canvas,
     };
   },
+  components: { LoadingAnimation },
 });
 </script>
