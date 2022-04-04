@@ -40,8 +40,17 @@
       >
         {{ barcode || "カメラを起動してください" }}
       </div>
-      <div class="flex-1 relative p-2 flex items-center">
-        <canvas ref="canvas" class="w-full h-full"></canvas>
+      <div class="flex-1 relative p-2 flex items-center flex-wrap">
+        <div
+          v-if="cameraId == undefined"
+          class="flex justify-center items-center w-full text-lg"
+        >
+          <font-awesome-icon
+            icon="spinner"
+            class="w-5 h-5 animate-spin mr-2"
+          />カメラの準備中...
+        </div>
+        <canvas v-else ref="canvas" class="w-full h-full"></canvas>
       </div>
       <div class="flex-grow-0 flex flex-wrap items-center py-2 px-4">
         <button
@@ -62,7 +71,9 @@ import { computed, defineComponent, onMounted, ref, watch } from "vue";
 import { useStore } from "vuex";
 import { State } from "@/store/state";
 import { useBarcode } from "./logics/barcode";
+import { valueToNode } from "@babel/types";
 import LoadingAnimation from "../UI/LoadingAnimation.vue";
+import FontAwesomeIcon from "@/plugins/FontAwesomeIcon.vue";
 
 export default defineComponent({
   emits: {
@@ -120,8 +131,9 @@ export default defineComponent({
       disableCamera,
       barcode,
       canvas,
+      cameraId,
     };
   },
-  components: { LoadingAnimation },
+  components: { LoadingAnimation, FontAwesomeIcon },
 });
 </script>

@@ -1,11 +1,10 @@
-import { APIError } from "@/@types/api";
-// import { ReqAnswer } from "@/@types/api";
+import { QUESTIONNAIRE_PATH } from "./../constants/api";
 import { Questions } from "@/@types/schema/question";
 import { calculateBranch } from "@/components/branches/calculateBranch";
 import { _fetch } from "@/libs/api";
 import { getCameraId } from "@/libs/getCameraId";
 import { isSkipped } from "@/libs/isSkipped";
-import { blobToBase64, increaseIncrement } from "@/libs/utils";
+import { increaseIncrement } from "@/libs/utils";
 import { ActionTree } from "vuex";
 import { State } from "./state";
 
@@ -13,18 +12,9 @@ export const actions: ActionTree<State, State> = {
   // 全調査データの取得
   async fetchQuestionnaires({ commit }) {
     commit("setNowLoading", true);
-    const { error, response } = await _fetch({
-      path: "/questionnaires",
-      method: "GET",
-      params: {},
-      body: null,
-    });
-    //
-    if (error == undefined) {
-      commit("setQuestionnaires", response);
-    } else {
-      commit("setError", error);
-    }
+    const res = await fetch(QUESTIONNAIRE_PATH);
+    const data = await res.json();
+    commit("setQuestionnaires", data);
     commit("setNowLoading", false);
   },
   // // データのPOST
