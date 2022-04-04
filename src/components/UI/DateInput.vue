@@ -1,17 +1,8 @@
 <template>
   <div class="my-3">
-    <div class="p-2 mb-1">
+    <div class="p-2 mb-1 text-center">
       <input
-        class="
-          flex-grow
-          font-bold
-          border-2
-          rounded
-          border-sub
-          bg-white
-          p-2
-          w-full
-        "
+        class="w-full font-bold border-2 rounded border-sub bg-white p-2"
         type="date"
         :max="disableFuture ? getDateString(today) : ''"
         :value="date"
@@ -20,7 +11,17 @@
     </div>
     <div class="flex p-2 w-full items-center">
       <button
-        class="border-2 border-sub rounded-lg bg-white font-bold w-1/4 p-2 flex items-center justify-center"
+        class="
+          border-2 border-sub
+          rounded-lg
+          bg-white
+          font-bold
+          w-1/4
+          p-2
+          flex
+          items-center
+          justify-center
+        "
         @click="changeDate(-1)"
       >
         <span class="material-icons-outlined"> remove </span>
@@ -40,7 +41,17 @@
         今日
       </button>
       <button
-        class="border-2 border-sub rounded-lg bg-white font-bold w-1/4 p-2 flex items-center justify-center"
+        class="
+          border-2 border-sub
+          rounded-lg
+          bg-white
+          font-bold
+          w-1/4
+          p-2
+          flex
+          items-center
+          justify-center
+        "
         @click="changeDate(1)"
       >
         <span class="material-icons-outlined"> add </span>

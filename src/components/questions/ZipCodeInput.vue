@@ -12,12 +12,14 @@
           rounded
           border-sub border-2
           flex-auto
+          w-full
         "
       >
-        <span>〒</span>
+        <span class="mr-2">〒</span>
         <input
           type="text"
           ref="code"
+          class="w-32"
           :value="zipCodeText"
           :maxlength="ZIP_CODE_LENGTH + 1"
           @input="onInput"

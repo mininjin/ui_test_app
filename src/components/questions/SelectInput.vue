@@ -19,9 +19,6 @@
               enter-active-class="transition-all"
               enter-from-class="opacity-0 transform translate-y-3 -translate-x-3"
               enter-to-class="opacity-1"
-              leave-active-class="transition-all duration-500"
-              leave-from-class="opacity-1"
-              leave-to-class="opacity-0"
             >
               <span v-if="item.checked" class="material-icons-outlined text-lg text-sub"> done </span>
             </transition>

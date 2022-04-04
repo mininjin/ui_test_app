@@ -1,6 +1,6 @@
 <template>
   <div class="my-3">
-    <div class="p-2 mb-1">
+    <div class="p-2 mb-1 text-center">
       <input
         type="time"
         class="

@@ -36,7 +36,7 @@
         バーコード
       </div>
       <div
-        class="flex-grow-0 bg-white rounded border-2 border-header w-full p-1"
+        class="flex-grow-0 bg-white rounded border-2 border-sub w-full p-1"
       >
         {{ barcode || "カメラを起動してください" }}
       </div>
@@ -71,7 +71,6 @@ import { computed, defineComponent, onMounted, ref, watch } from "vue";
 import { useStore } from "vuex";
 import { State } from "@/store/state";
 import { useBarcode } from "./logics/barcode";
-import { valueToNode } from "@babel/types";
 import LoadingAnimation from "../UI/LoadingAnimation.vue";
 import FontAwesomeIcon from "@/plugins/FontAwesomeIcon.vue";
 

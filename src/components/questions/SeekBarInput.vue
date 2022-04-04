@@ -1,7 +1,15 @@
 <template>
   <div class="absolute py-5 h-full w-full flex flex-col">
     <div class="flex-1 text-center flex flex-col" ref="container">
-      <div class="flex-1 my-5 relative">
+      <div
+        class="flex-1 my-5 relative"
+        @touchstart="onTouchStart"
+        @touchmove="onTouchStart"
+        @touchend="onTouchEnd"
+        @mousedown="onMouseDown"
+        @mousemove="onMouseMove"
+        @mouseup="onMouseUp"
+      >
         <div class="centerline absolute h-full top-0 bg-gray-500"></div>
         <div class="absolute flex flex-col h-full justify-items-stretch">
           <div
@@ -22,13 +30,7 @@
             </div>
           </div>
         </div>
-        <div
-          class="absolute"
-          :style="{ top: 100 - answer + '%' }"
-          @touchstart="onTouchStart"
-          @touchmove="onTouchStart"
-          @touchend="onTouchEnd"
-        >
+        <div class="absolute" :style="{ top: 100 - answer + '%' }">
           <div class="icon rounded-full shadow-lg bg-error"></div>
         </div>
       </div>
@@ -55,10 +57,16 @@ export default defineComponent({
         answered: true,
       });
     };
-    const { init, onTouchStart, onTouchEnd, answer, labels } = useSeekBar(
-      emitInput,
-      container
-    );
+    const {
+      init,
+      onTouchStart,
+      onTouchEnd,
+      onMouseDown,
+      onMouseMove,
+      onMouseUp,
+      answer,
+      labels,
+    } = useSeekBar(emitInput, container);
 
     watch(question, () => init(question.value));
 
@@ -73,6 +81,9 @@ export default defineComponent({
       onTouchEnd,
       answer,
       labels,
+      onMouseDown,
+      onMouseMove,
+      onMouseUp,
     };
   },
 });
@@ -80,23 +91,23 @@ export default defineComponent({
 
 <style scoped>
 .icon {
-  width: 2.5rem;
-  height: 2.5rem;
-  margin-left: calc(2.5rem * 2);
-  margin-top: calc(0rem - 2.5rem / 2);
+  width: 3rem;
+  height: 3rem;
+  margin-left: calc(3rem * 2);
+  margin-top: calc(0rem - 3rem / 2);
 }
 .centerline {
   width: 0.3rem;
-  left: calc(2.5rem * 2.5 - 0.3rem / 2);
+  left: calc(3rem * 2.5 - 0.3rem / 2);
 }
 .pad {
-  width: calc(2.5rem * 3);
+  width: calc(3rem * 3);
 }
 .bar {
   height: 0.3rem;
-  width: calc(2.5rem / 2);
+  width: calc(3rem / 2);
   margin-top: calc(0rem - 0.3rem / 2);
-  margin-left: calc(2.5rem * 2.5 - 2.5rem / 4);
+  margin-left: calc(3rem * 2.5 - 3rem / 4);
 }
 .label {
   margin-top: calc(0rem - 1rem / 2);

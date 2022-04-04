@@ -41,7 +41,7 @@
           @change="textInput(index, $event)"
         />
       </span>
-      <span class="p-1 text-center flex-grow-0">
+      <span class="p-1 text-center flex-grow-0 flex-shrink-0">
         {{ item.number }}{{ item.unit }}</span
       >
       <button
