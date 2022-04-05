@@ -1,11 +1,20 @@
 <!DOCTYPE html>
-<html lang="">
-  <head>
+<html lang="ja">
+  <head
+    prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#"
+  >
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <meta property="og:title" content="UI Test App" />
+    <meta property="og:type" content="product" />
+    <meta property="og:url" content="https://0ta-utan.com/questionnaire/index.html" />
+    <meta property="og:image" content="https://0ta-utan.com/questionnaire/img/thumbnail.png" />
+    <meta property="og:site_name" content="UI Test App" />
+    <meta property="og:description" content="このアプリはスマートフォン向けUIのテストアプリです。時間の無駄なのでブラウザバック推奨です。※サーバーにデータは送信されません。" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
