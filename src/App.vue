@@ -23,11 +23,23 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, onMounted } from "vue";
 import DisplayHeader from "./components/UI/DisplayHeader.vue";
 import DisplayFooter from "./components/UI/DisplayFooter.vue";
 
 export default defineComponent({
+  setup: () => {
+    onMounted(() => {
+      document.addEventListener(
+        "dblclick",
+        (e: Event) => {
+          e.preventDefault();
+        },
+        { passive: false }
+      );
+    });
+    return {};
+  },
   components: { DisplayHeader, DisplayFooter },
 });
 </script>

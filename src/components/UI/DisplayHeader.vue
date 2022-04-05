@@ -113,7 +113,7 @@
                 items-center
                 underline
               "
-              href="https://github.com/mininjin/ui_test_app"
+              href="https://github.com/mininjin/ui_test_app/tree/front-only"
               target="_blank"
               rel="noopener noreferrer"
             >

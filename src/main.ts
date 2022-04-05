@@ -4,6 +4,7 @@ import router from "./router";
 import store from "./store";
 import "./assets/index.css";
 import { FontAwesomeIcon } from "./plugins/fontawesome";
+import './registerServiceWorker';
 
 createApp(App)
   .use(store)
