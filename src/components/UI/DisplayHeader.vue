@@ -142,14 +142,13 @@
             ホームに戻る
           </button>
         </div>
-        <Error @close="() => go(HOME)" @resend="fetchData" />
       </div>
     </header>
   </transition>
 </template>
 
 <script lang="ts">
-import { APP_NAME, ERROR_MESSAGE_TIME, ROUTE } from "@/constants/application";
+import { APP_NAME, ROUTE } from "@/constants/application";
 import FontAwesomeIcon from "@/plugins/FontAwesomeIcon.vue";
 import { State } from "@/store/state";
 import { computed, defineComponent, ref } from "vue";
@@ -167,7 +166,6 @@ export default defineComponent({
       store.state.questionnaires.questionnaires.findIndex((v) => !v.answered)
     );
     const menu = ref(false);
-    const error = computed(() => store.state.error);
     const toggleMenu = () => (menu.value = !menu.value);
     const go = (root: string) => {
       router.push(root);
@@ -180,13 +178,7 @@ export default defineComponent({
     const fetchData = async () => {
       // 全調査データをサーバーから取得
       await store.dispatch("fetchQuestionnaires");
-      if (error.value != undefined) {
-        setTimeout(() => {
-          store.commit("setError", undefined);
-        }, ERROR_MESSAGE_TIME);
-      } else {
-        go(HOME);
-      }
+      go(HOME);
     };
     return {
       go,

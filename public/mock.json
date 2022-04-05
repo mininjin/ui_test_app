@@ -1,11 +1,11 @@
 {
   "title": "UIテスト",
-  "explanation": "UIテストアプリです。",
+  "explanation": "このアプリはスマートフォン向けUIのテストアプリです。時間の無駄なのでブラウザバック推奨です。※サーバーにデータは送信されません。",
   "questionnaires": [
     {
       "questionnaireId": 1,
       "title": "好みについて",
-      "explanation": "これはあなたの好みを知るアンケートです。",
+      "explanation": "これはあなたの嗜好を知るアンケートです。",
       "questions": [
         {
           "questionId": 1,
@@ -19,19 +19,19 @@
         {
           "questionId": 2,
           "type": "select",
-          "question": "好きな炭水化物を選んでください。",
+          "question": "好きな芋料理を選んでください。",
           "required": true,
           "config": {
             "choices": [
-              "ご飯",
-              "パン",
-              "うどん",
-              "そば",
-              "スパゲッティ",
-              "ラーメン",
               "ふかし芋",
-              "フライドポテト",
               "焼き芋",
+              "ジャーマンポテト",
+              "いももち",
+              "大学芋",
+              "じゃがバター",
+              "ポテトパイ",
+              "里芋の煮っころがし",
+              "長芋のサラダ",
               null
             ],
             "multiSelect": true
@@ -44,13 +44,14 @@
           "required": true,
           "config": {
             "choices": [
-              "0~6歳",
+              "0~1歳",
+              "2~3歳",
+              "4~6歳",
               "7~12歳",
-              "13~18歳",
-              "19~24歳",
-              "25~30歳",
-              "31歳~40歳",
-              "41歳~",
+              "13~15歳",
+              "16~18歳",
+              "19歳~22歳",
+              "23歳~",
               null
             ],
             "lowest": 3
@@ -59,13 +60,14 @@
         {
           "questionId": 4,
           "type": "member",
-          "question": "それぞれ持っている数を教えてください。",
+          "question": "それぞれ持っている数を教えてください。※自由入力可",
           "required": true,
           "config": {
             "choices": [
               { "label": "車", "unit": "台", "step": 1 },
               { "label": "家", "unit": "棟", "step": 1 },
-              { "label": "お金", "unit": "万円", "step": 10 },
+              { "label": "お金", "unit": "億円", "step": 10 },
+              { "label": "従業員", "unit": "人", "step": 1 },
               { "unit": "人", "step": 10 }
             ]
           }
@@ -73,7 +75,7 @@
         {
           "questionId": 5,
           "type": "member",
-          "question": "ペットを飼うならどの動物がいいですか？また、飼うなら何匹くらい欲しいですか？",
+          "question": "ペットを飼うならどの動物がいいですか？また、飼うなら何匹くらい欲しいですか？※動物は１種類のみ選択できます。",
           "required": true,
           "config": {
             "choices": [
@@ -81,10 +83,7 @@
               { "label": "猫", "unit": "匹", "step": 1 },
               { "label": "ハムスター", "unit": "匹", "step": 1 },
               { "label": "うさぎ", "unit": "羽", "step": 1 },
-              { "label": "インコ", "unit": "匹", "step": 1 },
-              { "label": "オウム", "unit": "匹", "step": 1 },
-              { "label": "カエル", "unit": "匹", "step": 1 },
-              { "label": "ヘビ", "unit": "匹", "step": 1 },
+              { "label": "社畜", "unit": "人", "step": 1 },
               { "unit": "匹", "step": 1 }
             ],
             "inputSingle": true
@@ -94,32 +93,38 @@
     },
     {
       "questionnaireId": 2,
-      "title": "テストアンケート2",
-      "explanation": "これはテストアンケート2です。",
+      "title": "会社について",
+      "explanation": "ここではあなたの所属している会社について答えてもらいます。",
       "questions": [
         {
-          "questionId": 6,
-          "type": "seek-bar",
-          "question": "あなた自身への自信を教えてください。",
+          "questionId": 7,
+          "type": "zip-code",
+          "question": "会社の住所を郵便番号で教えてください。※最低3桁。7桁入力すると住所が自動入力されます。",
           "required": true,
-          "config": {
-            "labels": [
-              "消えてしまいたい",
-              "私ダメかも",
-              "私イケてるかも",
-              "世界一"
-            ]
-          }
+          "config": { "requireLength": 3 }
         },
         {
           "questionId": 9,
           "type": "time",
-          "question": "今朝は何時に起きましたか？",
+          "question": "普段何時に出社しますか？",
           "required": true,
           "config": {
             "disableDate": true,
-            "timeStep": 10,
-            "disableFuture": true
+            "timeStep": 10
+          }
+        },
+        {
+          "questionId": 6,
+          "type": "seek-bar",
+          "question": "あなたの会社愛がどれくらいかを教えてください。",
+          "required": true,
+          "config": {
+            "labels": [
+              "会社と結婚したい",
+              "会社に住みたい",
+              "後輩には勧めない",
+              "今すぐ爆破したい"
+            ]
           }
         },
         {
@@ -127,42 +132,21 @@
           "type": "time",
           "question": "次の仕事の納期はいつですか？",
           "required": true,
-          "config": { "timeStep": 60 }
+          "config": { "timeStep": 60, "disableTime": true }
         },
-        {
-          "questionId": 7,
-          "type": "zip-code",
-          "question": "今後住みたい地域を郵便番号で教えてください。",
-          "required": true,
-          "config": { "requireLength": 3 }
-        },
-        {
-          "questionId": 8,
-          "type": "barcode",
-          "question": "製品のバーコードを読み取ります。",
-          "required": true,
-          "config": { "reader": "ean_reader" }
-        }
-      ]
-    },
-    {
-      "questionnaireId": 3,
-      "title": "テストアンケート3",
-      "explanation": "これはテストアンケート3です。",
-      "questions": [
         {
           "questionId": 11,
           "type": "image",
-          "question": "次の画像はうーたんですか？",
+          "question": "次の画像はあなたですか？",
           "required": true,
-          "config": { "choices": ["YES", "NO"], "src": "/images/utan.jpg" }
+          "config": { "choices": ["YES", "NO"], "src": "utan.jpg" }
         },
         {
           "questionId": 12,
           "type": "image",
-          "question": "次の画像を見てひとこと！",
+          "question": "次の画像を見てひとこと！※下までスクロールすると次に進めます。",
           "required": true,
-          "config": { "choices": [], "src": "/images/test.jpg" }
+          "config": { "choices": [], "src": "test.jpg" }
         },
         {
           "questionId": 13,
@@ -170,9 +154,56 @@
           "question": "さっきのひとことをどうぞ！",
           "required": true,
           "config": {
-            "placeholder": "感想を10文字以上100文字以内で入力してね！",
+            "placeholder": "10文字以上100文字以内で入力してね！",
             "min": 10,
             "max": 100
+          }
+        }
+      ]
+    },
+    {
+      "questionnaireId": 3,
+      "title": "生活習慣",
+      "explanation": "ここではあなたの生活習慣について答えてもらいます。",
+      "questions": [
+        {
+          "questionId": 8,
+          "type": "barcode",
+          "question": "最近食べたお菓子のバーコードを読み取ります。",
+          "required": true,
+          "config": { "reader": "ean_reader" }
+        },
+        {
+          "questionId": 10,
+          "type": "time",
+          "question": "そのお菓子はいつ買いましたか？",
+          "required": true,
+          "config": { "timeStep": 60, "disableFuture": true }
+        },
+        {
+          "questionId": 6,
+          "type": "seek-bar",
+          "question": "そのお菓子は美味しかったですか？",
+          "required": true,
+          "config": {
+            "labels": ["禁断の果実", "生ゴミ"]
+          }
+        },
+        {
+          "questionId": 14,
+          "type": "select",
+          "question": "そのお菓子を買った理由を選んでください。",
+          "required": true,
+          "config": {
+            "choices": [
+              "美味しそうだったから",
+              "いつも食べてるから",
+              "安かったから",
+              "ストレスが限界だったから",
+              "退職の開放感から仕方なく",
+              null
+            ],
+            "multiSelect": true
           }
         }
       ]

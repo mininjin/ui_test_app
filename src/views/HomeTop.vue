@@ -13,12 +13,14 @@
             done_outline </span
           ><span v-else class="text-base">-</span>
         </li>
-        <p
-          v-if="isCompleted"
-          class="mt-4 text-xl font-name font-bold text-sub text-shadow"
-        >
-          Congratulations !!
-        </p>
+        <div v-if="isCompleted" class="mt-4 text-sub">
+          <p class="text-xl font-name font-bold text-sub text-shadow mb-2">
+            Congratulations !!
+          </p>
+          <p>
+            ここまでのご回答ありがとうございます。お時間取らせてすみません。Twitterもフォローしていただけると嬉しいです。
+          </p>
+        </div>
       </div>
     </div>
     <div
@@ -34,7 +36,6 @@
         データの再取得
       </button>
     </div>
-    <ErrorDialog @close="close" @resend="init" />
   </main>
 </template>
 
@@ -44,7 +45,6 @@ import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import { State } from "@/store/state";
 import { ROUTE } from "@/constants/application";
-import ErrorDialog from "@/components/UI/ErrorDialog.vue";
 
 const { INPUT_TOP, INPUT_MODIFY } = ROUTE;
 
@@ -98,7 +98,6 @@ export default defineComponent({
       isCompleted,
     };
   },
-  components: { ErrorDialog },
 });
 </script>
 

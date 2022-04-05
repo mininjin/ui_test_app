@@ -19,7 +19,7 @@
           <LoadingAnimation />
         </div>
       </transition>
-      <div class="w-full h-full flex items-center" ref="camera">
+      <div class="w-full h-full flex items-center justify-center flex-wrap" ref="camera">
         <video autoplay="true"></video>
       </div>
       <div
@@ -40,7 +40,7 @@
       >
         {{ barcode || "カメラを起動してください" }}
       </div>
-      <div class="flex-1 relative p-2 flex items-center flex-wrap">
+      <div class="flex-1 relative p-2 flex items-center flex-wrap my-2">
         <div
           v-if="cameraId == undefined"
           class="flex justify-center items-center w-full text-lg"
@@ -50,7 +50,7 @@
             class="w-5 h-5 animate-spin mr-2"
           />カメラの準備中...
         </div>
-        <canvas v-else ref="canvas" class="w-full h-full"></canvas>
+        <canvas v-else ref="canvas" class="w-full h-full absolute top-0 left-0"></canvas>
       </div>
       <div class="flex-grow-0 flex flex-wrap items-center py-2 px-4">
         <button

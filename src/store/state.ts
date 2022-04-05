@@ -1,5 +1,5 @@
 import { Questionnaire } from "@/@types/schema/questionnaire";
-import { APIError, ResQuestionnaires } from "@/@types/api";
+import { ResQuestionnaires } from "@/@types/api";
 import { Questions } from "@/@types/schema/question";
 
 export type State = {
@@ -13,8 +13,6 @@ export type State = {
   common: {
     cameraId?: string;
   };
-  nowLoading: boolean;
-  error?: APIError;
 };
 
 export const initialState = (): State => ({
@@ -28,7 +26,6 @@ export const initialState = (): State => ({
     questionIndex: 0,
   },
   common: {},
-  nowLoading: false,
 });
 
 export const state: State = initialState();

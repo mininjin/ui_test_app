@@ -1,7 +1,6 @@
 import { QUESTIONNAIRE_PATH } from "./../constants/api";
 import { Questions } from "@/@types/schema/question";
 import { calculateBranch } from "@/components/branches/calculateBranch";
-import { _fetch } from "@/libs/api";
 import { getCameraId } from "@/libs/getCameraId";
 import { isSkipped } from "@/libs/isSkipped";
 import { increaseIncrement } from "@/libs/utils";
@@ -11,28 +10,10 @@ import { State } from "./state";
 export const actions: ActionTree<State, State> = {
   // 全調査データの取得
   async fetchQuestionnaires({ commit }) {
-    commit("setNowLoading", true);
     const res = await fetch(QUESTIONNAIRE_PATH);
     const data = await res.json();
     commit("setQuestionnaires", data);
-    commit("setNowLoading", false);
   },
-  // // データのPOST
-  // async postData({ state, commit }) {
-  //   commit("setNowLoading", true);
-  //   // リクエストボディ
-  //   const body: ReqAnswer = { data: state.questionnaires.questionnaires };
-  //   const { error } = await _fetch({
-  //     path: "/answer",
-  //     method: "POST",
-  //     params: {},
-  //     body,
-  //   });
-  //   if (error != undefined) {
-  //     commit("setError", error);
-  //   }
-  //   commit("setNowLoading", false);
-  // },
   // 回答の設定
   async setQuestion({ state, commit, dispatch }, incremental: number) {
     let nextQuestionIndex = state.page.questionIndex + incremental;

@@ -2,6 +2,7 @@ import { computed, Ref } from "vue";
 import { ref } from "vue";
 import { Image, ImageAnswer } from "@/@types/schema/question";
 import { blobToBase64 } from "@/libs/utils";
+import { IMAGE_DIR } from "@/constants/api";
 
 const CALCULATE_WAI_TIME = 300;
 
@@ -27,7 +28,7 @@ export const useImage = (
     answer.value = q.answer;
     image.value = undefined;
     try {
-      const res = await fetch(q.config.src);
+      const res = await fetch(IMAGE_DIR + q.config.src);
       const blob = await res.blob();
       image.value = (await blobToBase64(blob)) as string | undefined;
       setTimeout(() => {
