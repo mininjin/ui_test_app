@@ -21,7 +21,7 @@
   >
     <header
       v-if="menu"
-      class="fixed flex flex-col top-0 left-0 w-full h-full bg-container z-20"
+      class="fixed flex flex-col top-0 mx-auto max-w-3xl w-full h-full bg-container z-20"
     >
       <div class="flex items-center opacity-0 mb-5">
         <h1 class="text-xl flex-grow">ここは表示されません。</h1>
